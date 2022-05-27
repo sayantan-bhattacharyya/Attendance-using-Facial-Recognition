@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'camera.css' %}>
+    <title>Capture</title>
+</head>
+<body>
+    <div class="cameraElement">
+        <video id="webcam"  width="1200" height="600" autoplay></video>
+    </div>
+    <div class="buttonElement-train">
+        <button type="submit" class="btn-hover color-1" id="train">Start &#x2192</button>
+    </div>
+    <div class="buttonElement-back">
+        <button type="submit" class="btn-hover color-2" id ="back" onclick="window.location.href = '{% url 'landing' %}' ">&#x2190 Back</button>
+    </div>
+    <script>
+        let video=document.querySelector("#webcam");
+
+        if (navigator.mediaDevices.getDisplayMedia)
+        {
+            navigator.mediaDevices.getUserMedia({ video:true})
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (error)
+            {
+                console.log("ERROR")
+            })
+        }
+
+    </script>
+</body>
+</html>
